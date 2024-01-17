@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB SAYA</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Home bar -->
+        <div class="container-navbar">
+            <ul class="ul-navbar">
+                <li class="li-navbar"><a href="index.html" class="a-navbar">HOME</a></li>
+                <li class="li-navbar"><a href="shop.html" class="a-navbar">SHOP</a></li>
+                <li class="li-navbar"><a href="blog.html" class="a-navbar">BLOG</a></li>
+                <li class="li-navbar"><a href="about.html" class="a-navbar">ABOUT US</a></li>
+                <li class="li-navbar"><a href="contact.html" class="a-navbar">CONTACT US</a></li>
+                <li class="li-navbar"><a href="keranjang.html" class="a-navbar">KERANJANG</a></li>
+            </ul>
+        </div>
+        <!-- Home bar selesai -->
+ 
+        <!-- Keranjang belanja content -->
+        <div class="container-content">
+             <!--<center><p><h2>Keranjang Belanja</h2</p></center>-->
+
+               <!-- <p class="centered-text"><h2>Keranjang Belanja</h2></p> -->
+
+               <div class="above-text">
+                <h2>Keranjang Belanja</h2>
+               </div>
+            <br>
+
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                    <th><center>Produk</center></th>
+                    <th><center>Harga</center></th>
+                    <th><center>Jumlah</center></th>
+                    <th><center>Total</center></th>
+                    </tr>
+                </thead>
+                <body>
+                    <!-- Data keranjang belanja akan ditampilkan di sini -->
+                </body>
+            </table>
+        
+           <!-- <p class="total">Total Belanja: $<span id="totalAmount">0.00</span></p>> -->
+        
+            <script>
+                // Fungsi untuk menambah item ke keranjang belanja
+                function addItemToCart(product, price) {
+                    // Logika penanganan item di sini
+                }
+        
+                // Fungsi untuk mengupdate keranjang belanja
+                function updateCart() {
+                    // Logika update keranjang belanja di sini
+                }
+        
+                // Fungsi untuk menghapus item dari keranjang belanja
+                function removeItemFromCart(index) {
+                    // Logika penghapusan item di sini
+                }
+        
+                // Contoh pemanggilan fungsi
+                addItemToCart("Serum", 10.00);
+                addItemToCart("Produk B", 15.00);
+                updateCart();
+            </script>
+        </div>
+        <!-- Keranjang belanja content selesai -->
+
+        <!-- Footer -->
+        <div class="container-footer">
+            <h1 class="h1-footer">Terimakasih Sudah Berkunjung</h1>
+        </div>
+        <script>
+            // Fungsi untuk menambah item ke keranjang belanja
+            function addItemToCart(product, price) {
+                var tableBody = document.getElementById('cartBody');
+                var newRow = tableBody.insertRow();
+                
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+    
+                cell1.innerHTML = product;
+                cell2.innerHTML = '$' + price.toFixed(2);
+                cell3.innerHTML = '<input type="number" value="1" min="1" onchange="updateCart()">';
+                cell4.innerHTML = '$' + price.toFixed(2);
+                cell5.innerHTML = '<button onclick="removeItemFromCart(this)">Hapus</button>';
+    
+                updateCart();
+            }
+
+            // Fungsi untuk mengupdate keranjang belanja
+        function updateCart() {
+            var table = document.getElementById('cartTable');
+            var rows = table.getElementsByTagName('tr');
+            var totalAmount = 0;
+
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var quantityInput = row.cells[2].getElementsByTagName('input')[0];
+                var price = parseFloat(row.cells[1].innerHTML.replace('$', ''));
+                var quantity = parseInt(quantityInput.value);
+                var total = price * quantity;
+
+                row.cells[3].innerHTML = '$' + total.toFixed(2);
+                totalAmount += total;
+            }
+
+            // Update total belanja
+            document.getElementById('totalAmount').innerHTML = '$' + totalAmount.toFixed(2);
+        }
+
+        // Fungsi untuk menghapus item dari keranjang belanja
+        function removeItemFromCart(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            updateCart();
+        }
+    </script>
+    </div>
+</body>
+</html>
